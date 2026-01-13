@@ -11,48 +11,46 @@
 
   <body>
     <div class="stage">
-      <div class="game resto-page">
+ <div class="game resto-page">
 
-        <!-- Background -->
-        <img class="bg" id="bgImg" src="./bg.png" alt="" />
+  <!-- Background -->
+  <img class="bg" id="bgImg" src="./bg.png" alt="" />
 
+  <!-- Stuff that should stay clipped to the 844×390 frame -->
+  <img class="obj resto nohit" src="./resto.png" alt="" />
+  <img class="obj sign nohit" src="./sign.png" alt="" />
 
-        <!-- Non-interactive overlays -->
-    
-        <img class="obj resto nohit" src="./resto.png" alt="" />
-        <img class="obj sign nohit" src="./sign.png" alt="" />
+  <img class="obj cloud cloud1 nohit" src="./cloud1.png" />
+  <img class="obj cloud cloud2 nohit" src="./cloud2.png" />
+  <img class="obj cloud cloud3 nohit" src="./cloud3.png" />
+  <img class="obj cloud cloud4 nohit" src="./cloud4.png" />
 
-        <img class="obj cloud cloud1 nohit" src="./cloud1.png" />
-        <img class="obj cloud cloud2 nohit" src="./cloud2.png" />
-        <img class="obj cloud cloud3 nohit" src="./cloud3.png" />
-        <img class="obj cloud cloud4 nohit" src="./cloud4.png" />
+  <img class="obj bubble bubble2pc nohit" src="./bubble2pc.png" alt="" />
+  <img class="obj bubble bubble3pc nohit" src="./bubble3pc.png" alt="" />
 
-        <!-- Bubbles (spawn from pipe) -->
-        <img class="obj bubble bubble2pc nohit" src="./bubble2pc.png" alt="" />
-        <img class="obj bubble bubble3pc nohit" src="./bubble3pc.png" alt="" />
-        <a href="index.html" class="obj back-arrow hit" aria-label="Back to home">
-  <img src="./arrow_btn.png" alt="Back">
-</a>
+  <!-- ✅ SAFE LAYER: UI / buttons -->
+  <div class="safe-layer">
+    <a href="index.html" class="obj back-arrow hit" aria-label="Back to home">
+      <img src="./arrow_btn.png" alt="Back">
+    </a>
 
-        <!-- Interactive overlays -->
-        <a href="cookbook.html" class="obj menu hit" aria-label="Open cookbook">
-          <img src="./menu.png" alt="Menu" />
-        </a>
+    <a href="cookbook.html" class="obj menu hit" aria-label="Open cookbook">
+      <img src="./menu.png" alt="Menu" />
+    </a>
 
+    <button class="obj place_order hit" id="orderBtn" type="button" aria-label="Place order">
+      <img src="./place_order.png" alt="Place order" />
+    </button>
 
-        <button class="obj place_order hit" id="orderBtn" type="button" aria-label="Place order">
-          <img src="./place_order.png" alt="Place order" />
-        </button>
+    <button class="music-btn hit" id="musicBtn" aria-label="Toggle music">
+      <img src="./music_icon.png" alt="Music" />
+    </button>
+  </div>
 
-        <!-- Music toggle button -->
-        <button class="music-btn hit" id="musicBtn" aria-label="Toggle music">
-        <img src="./music_icon.png" alt="Music" />
-        </button>
+  <audio id="bgm" src="./spongebob1.mp3" loop></audio>
 
-        <audio id="bgm" src="./spongebob1.mp3" loop></audio>
+</div>
 
-      </div>
-    </div>
 
     <!-- JS goes at the bottom of body -->
     <script>

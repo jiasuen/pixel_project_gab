@@ -92,10 +92,14 @@ body {
   overflow: hidden; /* IMPORTANT: keeps z-index layering inside .game predictable */
 }
 
-/* Only resto page: prevent mobile clipping */
-.game.resto-page{
+/* UI renders safely without letting clouds spill outside */
+.game .safe-layer{
+  position: absolute;
+  inset: 0;
   overflow: visible;
+  z-index: 999; /* keep UI above */
 }
+
 
 .hearts-btn { 
   z-index: 20 !important; 
