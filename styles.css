@@ -89,7 +89,7 @@ body {
 .game {
   position: relative;
   isolation: isolate;
-  overflow: visible; /* IMPORTANT: keeps z-index layering inside .game predictable */
+  overflow: hidden; /* IMPORTANT: keeps z-index layering inside .game predictable */
 }
 
 .hearts-btn { 
