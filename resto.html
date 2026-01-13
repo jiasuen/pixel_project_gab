@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Gaby Adventure</title>
+
+    <!-- IMPORTANT: link your CSS here -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <div class="stage">
+      <div class="game">
+        <!-- Background -->
+        <img class="bg" id="bgImg" src="./bg.png" alt="" />
+
+
+        <!-- Non-interactive overlays -->
+    
+        <img class="obj resto nohit" src="./resto.png" alt="" />
+        <img class="obj sign nohit" src="./sign.png" alt="" />
+
+        <img class="obj cloud cloud1 nohit" src="./cloud1.png" />
+        <img class="obj cloud cloud2 nohit" src="./cloud2.png" />
+        <img class="obj cloud cloud3 nohit" src="./cloud3.png" />
+        <img class="obj cloud cloud4 nohit" src="./cloud4.png" />
+
+        <!-- Bubbles (spawn from pipe) -->
+        <img class="obj bubble bubble2pc nohit" src="./bubble2pc.png" alt="" />
+        <img class="obj bubble bubble3pc nohit" src="./bubble3pc.png" alt="" />
+        <a href="index.html" class="obj back-arrow hit" aria-label="Back to home">
+  <img src="./arrow_btn.png" alt="Back">
+</a>
+
+        <!-- Interactive overlays -->
+        <a href="cookbook.html" class="obj menu hit" aria-label="Open cookbook">
+          <img src="./menu.png" alt="Menu" />
+        </a>
+
+
+        <button class="obj place_order hit" id="orderBtn" type="button" aria-label="Place order">
+          <img src="./place_order.png" alt="Place order" />
+        </button>
+
+        <!-- Music toggle button -->
+        <button class="music-btn hit" id="musicBtn" aria-label="Toggle music">
+        <img src="./music_icon.png" alt="Music" />
+        </button>
+
+        <audio id="bgm" src="./spongebob1.mp3" loop></audio>
+
+      </div>
+    </div>
+
+    <!-- JS goes at the bottom of body -->
+    <script>
+    const musicBtn = document.getElementById("musicBtn");
+    const bgm = document.getElementById("bgm");
+
+    const tracks = [
+        "./spongebob1.mp3",
+        "./spongebob2.mp3"
+    ];
+
+    // 🎲 Pick a song ONCE per page refresh
+    const chosenTrack = tracks[Math.floor(Math.random() * tracks.length)];
+    bgm.src = chosenTrack;
+    bgm.volume = 0.6;
+    bgm.loop = true;
+
+    let isPlaying = false;
+
+    musicBtn.addEventListener("click", () => {
+        if (!isPlaying) {
+        bgm.play();
+        } else {
+        bgm.pause();
+        }
+        isPlaying = !isPlaying;
+    });
+    </script>
+
+    <script>
+    function getDublinHour() {
+        const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Dublin",
+        hour: "2-digit",
+        hour12: false
+        }).formatToParts(new Date());
+
+        const hourStr = parts.find(p => p.type === "hour")?.value ?? "0";
+        return parseInt(hourStr, 10);
+    }
+
+    function pickBgForDublin(hour) {
+        // Simple time bands (adjust if you want)
+        // Night: 20–5, Day: 6–16, Sunset: 17–19
+        if (hour >= 20 || hour <= 5) return "./bg3.png";  // night
+        if (hour >=16 && hour <= 19) return "./bg2.png"; // sunset
+        return "./bg.png";                                 // day
+    }
+
+    function applyDublinBackground() {
+    const hour = getDublinHour();
+    const bgSrc = pickBgForDublin(hour);
+
+    const bgImg = document.getElementById("bgImg");
+    if (bgImg) bgImg.src = bgSrc;
+
+    const clouds = document.querySelectorAll(".cloud");
+
+    // Show clouds ONLY during day
+    if (bgSrc === "./bg.png") {
+    clouds.forEach(c => c.classList.remove("hidden"));
+    } else {
+    clouds.forEach(c => c.classList.add("hidden"));
+    }
+
+    }
+
+
+    // Set once on load
+    applyDublinBackground();
+
+    // Optional: re-check every 5 minutes in case time band changes while page is open
+    setInterval(applyDublinBackground, 5 * 60 * 1000);
+    </script>
+
+
+
+
+  </body>
+</html>

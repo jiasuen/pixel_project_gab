@@ -1,0 +1,662 @@
+/* Reset */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+
+body {
+  margin: 0;
+  background: #111;
+}
+
+/* NEW: use your resized PNG figma coords */
+.hearts-btn { left: 278px; top: 51px; width: 288px; height: 144px; z-index: 20; }
+.resto-btn  { left: 313px; top: 207px; width: 232px; height: 77px;  z-index: 10; }
+
+.hearts-btn img,
+.resto-btn img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* Back arrow on cookbook page */
+.game.cookbook .back-arrow{
+  left: 12px;
+  top: 12px;
+  width: 48px;   /* adjust if you want bigger/smaller */
+  height: 48px;
+  z-index: 999;
+}
+
+.game.cookbook .back-arrow img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* Back arrow (shared) */
+.back-arrow{
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 48px;
+  height: 48px;
+  z-index: 999;
+}
+
+.back-arrow img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* Optional interaction */
+.back-arrow:active{
+  transform: scale(0.95);
+}
+
+
+.bg {
+  z-index: 0;
+}
+
+.cloud1, .cloud2, .cloud3, .cloud4 {
+  z-index: 1;
+}
+
+.resto, .sign {
+  z-index: 3;   /* ABOVE clouds */
+}
+
+.menu, .place_order {
+  z-index: 5;   /* ALWAYS on top */
+}
+
+.bubble {
+  z-index: 2;   /* between clouds & house (optional) */
+}
+
+
+
+
+
+
+.game {
+  position: relative;
+  isolation: isolate;
+  overflow: visible; /* IMPORTANT: keeps z-index layering inside .game predictable */
+}
+
+.hearts-btn { 
+  z-index: 20 !important; 
+}
+
+.resto-btn  { 
+  z-index: 10 !important; 
+}
+
+
+/* Default button style (keep only ONE .hit block) */
+.hit {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-block;   /* important */
+}
+
+.hit img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+
+
+
+/* Every overlay must be absolute */
+.obj {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+/* Non-interactive */
+.nohit {
+  pointer-events: none;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* ---- RESTO page (landscape) ---- */
+/* This applies when .game does NOT have class "hearts" */
+.game:not(.hearts) {
+  width: 844px;
+  height: 390px;
+  background: white;
+}
+
+/* Background image sizing ONLY for resto page */
+.game:not(.hearts) .bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 844px;
+  height: 390px;
+  display: block;
+  z-index: 0;
+  image-rendering: pixelated;
+}
+
+/* ---- HEARTS page (portrait) ---- */
+.game.hearts {
+  width: 390px;
+  height: 844px;
+  background: #f7eddc; /* fallback cream */
+}
+
+/* IMPORTANT: hearts backgrounds should NOT inherit 844x390 */
+.game.hearts .bg {
+  position: absolute;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* Your hearts layers */
+.hearts-bg {
+  left: -27px;
+  top: -4px;
+  width: 464px;
+  height: 848px;
+  z-index: 0;
+}
+
+.hearts-bg2 {
+  left: -345px;
+  top: 504px;
+  width: 464px;
+  height: 848px;
+  z-index: 1;
+}
+
+/* Scroll area */
+.scroll{
+  position:absolute;
+  left:-9px;
+  top:128px;
+  width:399px;
+  height:649px;
+  z-index:50;
+}
+
+/* Full scroll image */
+.scroll-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  pointer-events:none;
+  image-rendering:pixelated;
+}
+
+/* Text window — placed INSIDE the parchment */
+.scroll-viewport{
+  position:absolute;
+  z-index:2;
+
+  /* 🔥 THIS is the important part */
+  left: 100px;      /* was 60px */
+  top: 86px;       /* small tweak */
+  width: 230px;    /* was 280px */
+  height: 430px;   /* slightly smaller */
+
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+
+  /* optional: visual debug */
+  /* background: rgba(255,0,0,0.05); */
+}
+
+.scroll-viewport::-webkit-scrollbar{ display:none; }
+
+/* Text */
+.letter-content p{
+  margin:0 0 14px;
+  font-size:14px;
+  line-height:1.7;
+  color:#5a3a2e;
+  font-family:system-ui, -apple-system, Segoe UI, Arial;
+    text-align: left;
+  hyphens: auto;
+}
+.letter-content img.memory,
+.letter-content video.memory{
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 14px 0 0;
+  border-radius: 10px; /* optional */
+}
+
+/* Optional: video a bit more “card-like” */
+.letter-content video.memory{
+  background: #000;
+}
+
+.music-btn{
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+
+  width: 40px;
+  height: 40px;
+
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  z-index: 999;
+}
+
+.music-btn img{
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.arrow-btn{
+  left: 328px;
+  top: 777px;
+  width: 62px;
+  height: 46px;
+  z-index: 999;
+}
+
+.arrow-btn img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* Pipe spawn point: use YOUR figma X/Y as the base */
+.bubble {
+  left: 385px;   /* start near your bubble2pc X */
+  top: 75px;     /* pick the pipe mouth Y (adjust if needed) */
+  opacity: 0;
+  transform: translateY(0) scale(1);
+  animation: bubbleUp 1.8s linear infinite;
+}
+
+/* Alternate the two bubble sprites */
+.bubble2pc {
+  width: 49px;
+  height: 49px;
+  animation-delay: 0s;
+}
+
+.bubble3pc {
+  width: 39px;
+  height: 39px;
+  animation-delay: 0.9s; /* half cycle so they take turns */
+}
+
+/* Bubble motion: rise up, drift slightly, fade out */
+@keyframes bubbleUp {
+  0% {
+    opacity: 0;
+    transform: translate(0, 12px) scale(0.9);
+  }
+  10% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(18px, -110px) scale(1.15);
+  }
+}
+
+.cloud1, .cloud2, .cloud3, .cloud4 {
+  animation: driftRight linear infinite;
+  will-change: transform, opacity;
+}
+
+
+
+.cloud1 { animation-duration: 14s; animation-delay: -5s; }
+.cloud2 { animation-duration: 11s; animation-delay: -7s; }
+.cloud3 { animation-duration: 13s; animation-delay: -9s; }
+.cloud4 { animation-duration: 20s; animation-delay: -11s; }
+
+
+/* Move right and wrap back left */
+@keyframes driftRight {
+  0%   { transform: translateX(-400px); opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { transform: translateX(1200px); opacity: 0; }
+}
+
+.cloud {
+  transition: opacity 1.2s ease;
+}
+.cloud.hidden { display: none; }
+
+
+
+.ui {
+  position: absolute;
+  z-index: 999;           /* always above everything */
+  pointer-events: auto;
+  image-rendering: pixelated;
+}
+
+
+/* ---- COOKBOOK page (same as resto size) ---- */
+.game.cookbook{
+  width: 844px;
+  height: 390px;
+  background: white;
+  position: relative;
+  overflow: visible;
+}
+
+.game.cookbook .cookbook-bg{
+  position: absolute;
+  left: 0px;     /* you said X0 */
+  top: -5px;     /* you said Y-5 */
+  width: 861px;  /* you said W861 */
+  height: 395px; /* you said H395 */
+  image-rendering: pixelated;
+  z-index: 0;
+}
+
+/* All recipe buttons */
+.game.cookbook .recipe-btn{
+  position: absolute;
+  z-index: 10;
+  display: block;
+}
+
+.game.cookbook .recipe-btn img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+
+/* --- Positions from your Figma screenshots --- */
+/* EASY column */
+.bibimbap{ left: 2px;   top: 186px; width: 154px; height: 28px; }
+.creamymushroom { left: 4px;   top: 227px; width: 152px; height: 32px; }
+.creamykale{ left: 21px; top: 269px; width: 135px; height: 34px; }
+.misosoup{ left: 40px; top: 312px; width: 116px; height: 35px; }
+.tomatoegg{ left: 44px; top: 136px; width: 112px; height: 41px; } /* you labeled miso as 7th but screenshot shows this position */
+
+/* MED column */
+.eggdrop{ left: 173px; top: 136px; width: 137px; height: 41px; }
+.kimchifriedrice{ left: 173px; top: 186px; width: 137px; height: 41px; }
+.mapotofu{ left: 350px; top: 136px; width: 143px; height: 43px; }
+/* MED column – remaining recipes */
+.beefonion{
+  left: 350px;
+  top: 191px;
+  width: 145px;
+  height: 43px;
+}
+
+.japcurry{
+  left: 350px;
+  top: 243px;
+  width: 143px;
+  height: 43px;
+}
+
+/* ---- HOW TO COOK pages ---- */
+.game.howto{
+  width: 844px;
+  height: 390px;
+  background: #fff;
+  position: relative;
+  overflow: visible;
+}
+
+/* the template image */
+.howtocook-bg{
+  position: absolute;
+  left: 29px;
+  top: -5px;
+  width: 766px;
+  height: 408px;
+  image-rendering: pixelated;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* content sits on top */
+.howto-content{
+  position: absolute;
+  left: 29px;
+  top: -5px;
+  width: 766px;
+  height: 408px;
+  z-index: 2;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Arial;
+  color: #6b4b3b;
+}
+
+/* two columns inside the template */
+.howto-grid{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 766px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 28px;
+
+  padding: 70px 40px 30px;
+  box-sizing: border-box;
+}
+
+
+/* Scroll only inside the recipe body area */
+.ingredients,
+.instructions{
+  margin-top: 12px;
+  height: 270px;          /* 👈 controls the scroll window height */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ingredients{
+  margin-left: 14px;
+  padding-right: 6px;
+}
+
+.instructions{
+  margin-left: 25px;
+  padding-right: 6px;
+}
+
+.instructions ol{
+  list-style-position: outside;
+  counter-reset: list-item;
+}
+
+.instructions ol.steps{
+  list-style: none;        /* turn off default numbering */
+  padding-left: 0;
+  margin: 0;
+  counter-reset: step;
+}
+
+.instructions ol.steps > li{
+  counter-increment: step;
+  display: block;
+  margin: 0 0 10px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* the number */
+.instructions ol.steps > li::before{
+  content: counter(step) ". ";
+  font-variant-numeric: tabular-nums;
+}
+
+.ingredients::-webkit-scrollbar,
+.instructions::-webkit-scrollbar { display: none; }
+.ingredients, .instructions { scrollbar-width: none; }
+
+/* checkbox rows */
+.ing-item{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.ing-item input{
+  margin-top: 2px;
+  transform: scale(1.1);
+}
+
+/* numbered list */
+.instructions ol{
+  margin: 0;
+  padding-left: 18px;
+}
+
+.instructions li{
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* optional back button */
+.back-btn{
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 48px;
+  height: 48px;
+  z-index: 999;
+}
+.back-btn img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* ===============================
+   AUTO-SCALE GAME TO FIT SCREEN
+   =============================== */
+/* ===============================
+   AUTO-SCALE GAME TO FIT SCREEN
+   (SAFE, CROSS-BROWSER)
+   =============================== */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body{
+  background:#111;
+  overflow:hidden;
+}
+
+/* ===============================
+   AUTO-SCALE GAME TO FIT SCREEN
+   (SAFE, CROSS-BROWSER)
+   =============================== */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body{
+  background:#111;
+  overflow:hidden;
+}
+
+.stage{
+  width:100vw;
+  height:100vh;     /* fallback */
+  height:100dvh;    /* mobile-safe */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* default = landscape pages */
+.game{
+  --w: 850px;
+  --h: 390px;
+
+  width: var(--w);
+  height: var(--h);
+
+  /* compute scale safely */
+  --s: min(1, calc(100vw / var(--w)), calc(100dvh / var(--h)));
+
+  transform: scale(var(--s));
+  transform-origin: center;
+}
+
+/* portrait hearts page */
+.game.hearts{
+  --w: 390px;
+  --h: 844px;
+}
+
+
+
+/* Optional arrow placement (use your earlier arrow coords if you want) */
+.game.cookbook .arrow-btn{
+  left: 328px;
+  top: 777px;
+  width: 62px;
+  height: 46px;
+  z-index: 999;
+}
+.game.cookbook .arrow-btn img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+
+
+/* ---- Your Figma placements ---- */
+.place_order { left: 565px; top: 215px; width: 219px; height: 219px; }
+
+.cloud4 { left: 696px; top: 66px;  width: 148px; height: 148px; }
+.cloud1 { left: 0px;   top: 22px;  width: 148px; height: 148px; }
+.cloud3 { left: 595px; top: 34px;  width: 123px; height: 123px; }
+.cloud2 { left: 25px;  top: 138px; width: 123px; height: 123px; }
+.resto  {left: 255px; top: 20px; width: 375px; height: 372px;}
+.sign   {left: 45px; top: 16px; width: 240px; height: 315px;}
+.menu   { left: 51px;  top: 203px; width: 234px; height: 234px; }
+
